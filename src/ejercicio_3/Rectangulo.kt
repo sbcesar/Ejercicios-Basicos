@@ -1,14 +1,19 @@
 package ejercicio_3
 
-class Rectangulo(base: Double,altura: Double) {
-    var base: Double = 0.0
-    var altura: Double = 0.0
+class Rectangulo(base: Double, altura: Double) {
+    private var base: Double = 0.0
+    private var altura: Double = 0.0
 
-    fun area(): String {
+    init {
+        this.base = base
+        this.altura = altura
+    }
+
+    private fun area(): String {
         return "%.2f".format(base * altura)
     }
 
-    fun perimetro(): String {
+    private fun perimetro(): String {
         return "%.2f".format((2 * base) + (2 * altura))
     }
 
