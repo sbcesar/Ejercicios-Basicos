@@ -1,17 +1,18 @@
 package ejercicio_5
 
 fun main() {
-    val tiempo1 = Tiempo(0.0,0.0,0.0)
 
     println("Introduce la hora: ")
-    tiempo1.horas = readln().toDouble()
+    val hora = readln().toIntOrNull() ?: 0
 
     println("Introduce los minutos: ")
-    tiempo1.minutos = readln().toDouble()
+    val minuto = readln().toIntOrNull() ?: 0
 
     println("Introduce los segundos: ")
-    tiempo1.segundos = readln().toDouble()
+    val segundo = readln().toIntOrNull() ?: 0
 
-    println(tiempo1.toString())
+    val tiempo1 = Tiempo(hora,minuto,segundo)
+
+    println("La hora es: $tiempo1")
 
 }

@@ -50,7 +50,6 @@ class Coche(color: String, marca: String, modelo: String, nCaballos: Int, nPuert
         } catch (e: Exception) {
             println(e.message)
         }
-
     }
 
     fun getNumCaballos(): Int { return nCaballos }

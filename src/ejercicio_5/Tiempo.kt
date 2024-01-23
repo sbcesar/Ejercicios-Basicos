@@ -1,18 +1,22 @@
 package ejercicio_5
 
-class Tiempo(horas: Double,minutos: Double,segundos: Double) {
-    var horas: Double = 0.0
-    var minutos: Double = 0.0
-    var segundos: Double = 0.0
+class Tiempo(private var horas: Int, private var minutos: Int, private var segundos: Int) {
 
     init {
-        this.horas = horas
-        this.minutos = minutos
-        this.segundos = segundos
+        require(horas in 0..23) { "La hora debe estar desde 0 a 23" }
+        require(minutos in 0..59) { "Los minutos deben estar desde 0 a 59" }
+        require(segundos in 0..59) { "Los segundos deben estar desde 0 a 59" }
+
+        val minutosAjustados = (minutos + segundos / 60) % 60
+        val horasAjustadas = (horas + minutos / 60) % 24
+
+        this.horas = horasAjustadas
+        this.minutos = minutosAjustados
+        this.segundos %= 60
     }
 
     override fun toString(): String {
-        return "Hora: ${horas}h ${minutos}m ${segundos}s"
+        return String.format("%02d:%02d:%02d", horas, minutos, segundos)
     }
 
 }
