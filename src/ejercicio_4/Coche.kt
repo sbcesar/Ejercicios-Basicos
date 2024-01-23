@@ -11,6 +11,12 @@ class Coche(color: String, marca: String, modelo: String, nCaballos: Int, nPuert
     private var nPuertas: Int = 0
     private var matricula: String = ""
 
+    init {
+        this.color = color
+        this.marca = marca
+        this.modelo = modelo
+        this.matricula = matricula
+    }
     fun getColor(): String { return color }
     //Si la variable es una propiedad de la clase y tratas de validarla puedes usar require
     //Si la variable es local y no una propiedad de la clase entonces se hace la validacion directamente sin usar require:
@@ -57,9 +63,45 @@ class Coche(color: String, marca: String, modelo: String, nCaballos: Int, nPuert
         }
     }
 
+    fun getNumPuertas(): Int { return nPuertas }
+    fun setNumPuertas(nuevoNumPuertas: Int) {
+        try {
+            require(nuevoNumPuertas in 3..5) { "El numero de puertas debe rondar entre 3 y 5 puertas." }
+            nPuertas = nuevoNumPuertas
+        } catch (e: Exception) {
+            println(e.message)
+        }
+    }
 
+    fun getMatricula(): String { return matricula }
+    fun setMatricula(nuevaMatricula: String) {
+        try {
+            require(validarMatricula(nuevaMatricula)) { "La matricula debe comenzar con 4 dígitos y terminar con 3 números" }
+        } catch (e: Exception) {
+            println(e.message)
+        }
+    }
+
+    fun validarMatricula(matricula: String): Boolean {
+        val primerosCuatro = matricula.substring(0,4)
+        val ultimosTres = matricula.substring(4)
+
+        if (matricula.length != 7) {
+            return false
+        }
+
+        return primerosCuatro.all { it.isDigit() } && ultimosTres.all { it.isUpperCase() }
+    }
 
     override fun toString(): String {
-        return "Color='$color', marca='$marca', modelo='$modelo', nCaballos=$nCaballos, nPuertas=$nPuertas, matricula='$matricula')"
+        return """
+        |   Color:      $color
+        |   Marca:      $marca
+        |   Modelo:     $modelo
+        |   Caballos:   $nCaballos
+        |   Puertas:    $nPuertas
+        |   Matrícula:  $matricula
+    """.trimMargin()
     }
+
 }
